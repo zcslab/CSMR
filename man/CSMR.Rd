@@ -2,7 +2,7 @@
 % Please edit documentation in R/CSMR.R
 \name{CSMR}
 \alias{CSMR}
-\title{The main function of the RBSL algorithm.}
+\title{The main function of the CSMR algorithm.}
 \usage{
 CSMR(x, y, nit, nc, max_iter)
 }
@@ -21,5 +21,5 @@ CSMR(x, y, nit, nc, max_iter)
 A list object consist of coefficient, clustering membership, data x, external variable y, predicted y based on regression model.
 }
 \description{
-The main function of the RBSL algorithm.
+The main function of the CSMR algorithm.
 }

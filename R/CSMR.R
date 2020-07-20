@@ -41,7 +41,7 @@ Rec_Lm<-function(XX,yy){
 }
 
 
-#' Perform the RBSL algorithm one times.
+#' Perform the CSMR algorithm one times.
 #'
 #' @param x The matrix
 #' @param y The external supervised variable.
@@ -102,7 +102,7 @@ CSMR_one<-function(x,y,nit=1,nc,max_iter){
 }
 
 
-#' The main function of the RBSL algorithm.
+#' The main function of the CSMR algorithm.
 #'
 #' @param x The matrix
 #' @param y The external supervised variable.
@@ -176,29 +176,45 @@ blockMap <- function(rrr){
             lmat=rbind(c(5, 4, 2), c(6, 1, 3)), lhei=c(2.5, 5), lwid=c(5, 8, 5)
             #lwid control the left/right margin of the heatmap
   )
-  # heatmap.2(mat, Rowv=NULL,Colv=NULL,
-  #           col = eg_color,
-  #           scale="none",
-  #           margins=c(3,0), # ("margin.Y", "margin.X")
-  #           trace='none',
-  #           symkey=FALSE,
-  #           symbreaks=FALSE,
-  #           dendrogram='none',
-  #           density.info='histogram',
-  #           denscol="black",
-  #           keysize=1,
-  #           #( "bottom.margin", "left.margin", "top.margin", "left.margin" )
-  #           key.par=list(mar=c(3.5,0,3,0)),
-  #           # lmat -- added 2 lattice sections (5 and 6) for padding
-  #           lmat=rbind(c(5, 4, 2), c(6, 1, 3)), lhei=c(2.5, 5), lwid=c(1, 10, 1)
-  # )
 
 
 }
 
+#' The simulation function for validating CSMR algorithm.
+#'
+#' @param n Objective number.
+#' @param bet Coefficient matrix.
+#' @param pr Probability for the objective mixtured in all samples.
+#' @param sigma The noise level.
+#' @return A list object consist of simulated data with ground truth.
+simu_data_sparse<-function(n,bet, pr, sigma ){
+  nc=length(pr)
+  x=t(replicate(ncol(bet)-1,rnorm(n,0,1)))
+  rownames(x)=paste("Gene",1:(ncol(bet)-1),sep="")
+  colnames(x)=paste("Sample",1:n,sep="")
+  u=runif(n,0,1);
+  clusters=rep(0,n)
+  y=rep(0,n)
+  pr_tmp=c(0,cumsum(pr))
+  for(j in 1:nc){
+    ee=rnorm(n,0,sigma[j])
+    yy=bet[j,]%*%rbind(1,x)+ee
+    y=y+(u<=pr_tmp[j+1] & u>pr_tmp[j])*yy
+    clusters=clusters+(u<=pr_tmp[j+1] & u>pr_tmp[j])*j
+  }
+  x=t(x)
+  names(y)=paste("S",1:n,sep="")
+  sss=order(clusters)
+  x=x[sss,]
+  y=y[sss]
+  clusters=clusters[sss]
+  tmp_list=list(x=x,y=y,clusters=clusters);names(tmp_list)=c("x","y","clusters")
+  return(tmp_list)
+}
+
 #-------------------CSMR example----------------
 
-# n=400####need to loop through 100, 200 400
+# n=400
 # bet1=bet2=rep(0,101)
 # bet1[2:21]=sign(runif(20,-1,1))*runif(20,2,5)
 # bet2[22:41]=sign(runif(20,-1,1))*runif(20,2,5)

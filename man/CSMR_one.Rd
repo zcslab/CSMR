@@ -2,7 +2,7 @@
 % Please edit documentation in R/CSMR.R
 \name{CSMR_one}
 \alias{CSMR_one}
-\title{Perform the RBSL algorithm one times.}
+\title{Perform the CSMR algorithm one times.}
 \usage{
 CSMR_one(x, y, nit = 1, nc, max_iter)
 }
@@ -21,5 +21,5 @@ CSMR_one(x, y, nit = 1, nc, max_iter)
 A list object consist of coefficient, clustering membership, data x, external variable y, predicted y based on regression model.
 }
 \description{
-Perform the RBSL algorithm one times.
+Perform the CSMR algorithm one times.
 }

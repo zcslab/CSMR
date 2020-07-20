@@ -6,7 +6,7 @@ A tremendous amount of applications deal with relating a response variable to a 
 
 ![image](https://github.com/zcslab/CSMR/blob/master/img/CSMR_frame.png)
 
-# Installation
+## Installation
 
 ```
 #install CSMR

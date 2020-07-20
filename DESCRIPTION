@@ -1,0 +1,20 @@
+Package: CSMR
+Type: Package
+Title: A novel supervised clustering algorithm using penalized mixture regression model
+Version: 0.0.1
+Date: 2020-07-20
+Authors@R: c(
+             person("Wennan", "Chang", email = "wnchang@iu.edu", role = c("aut", "cre"))
+             )
+Author: 
+  Wennan Chang [aut, cre]
+Maintainer: Wennan Chang <wnchang@iu.edu>
+Description: Identifying relationships between molecular variations and their clinical presentations has been challenged by the heterogeneous causes of a disease. It is imperative to unveil the relationship between the high dimensional molecular manifestations and the clinical presentations, while taking into account the possible heterogeneity of the study subjects.We proposed a novel supervised clustering algorithm using penalized mixture regression model, called CSMR, to deal with the challenges in studying the heterogeneous relationships between high dimensional molecular features to a phenotype. The algorithm was adapted from the classification expectation maximization algorithm, which offers a novel supervised solution to the clustering problem, with substantial improvement on both the computational efficiency and biological interpretability.
+Depends: R (>= 3.5.0)
+License: GPL
+Encoding: UTF-8
+LazyData: true
+Imports:  stats,dplyr,lars,gplots,grDevices,scales,graphics,rlang
+RoxygenNote: 6.1.1
+URL: https://github.com/zcslab/CSMR
+BugReports: https://github.com/zcslab/CSMR/issues

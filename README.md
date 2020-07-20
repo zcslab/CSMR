@@ -14,24 +14,28 @@ install.packages("devtools")
 devtools::install_github("zcslab/CSMR")
 ```
 
-## Run CSMR
+## Usage
 ```
-n=400
-bet1=bet2=rep(0,101)
-bet1[2:21]=sign(runif(20,-1,1))*runif(20,2,5)
-bet2[22:41]=sign(runif(20,-1,1))*runif(20,2,5)
-bet=rbind(bet1,bet2)
-pr=c(1,1)*0.5
-sigs=c(1,1)
-tmp_list = simu_data_sparse(n=n,bet=bet,pr=pr,sigma=sigs)
-nit=1
-nc=2
-max_iter=50
-x=tmp_list$x
-y=tmp_list$y
-rrr=CSMR(x,y,nit,nc,max_iter)
+result=CSMR(x,y,nit,nc,max_iter)
 ```
 
+## Arguments
+* ```x``` High dimensional data matrix. The row is the object and the column is the feature.
+* ```y``` The external supervised variable.
+* ``` nc ``` The component number in the mixture model.
+* ``` max_iter ``` The maximum iteration number.
+
+
+## Value
+Result list contains five elements: ```coffs``` shows the coefficient matrix in mixture regression model; ```clus``` is the predicted cluster membership for each object; ```x``` is the input high dimensional data matrix; ```y``` is the input external supervised variable; ```yhat``` is the predicted external variable based on the mixture model.
+
+## Example
+```
+library(CSMR)
+X = example_data$x
+y = example_data$y
+esult=CSMR(X,y,nc=2,max_iter=50)
+```
 
 ### Questions & Problems
 

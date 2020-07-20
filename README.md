@@ -22,7 +22,7 @@ bet1[2:21]=sign(runif(20,-1,1))*runif(20,2,5)
 bet2[22:41]=sign(runif(20,-1,1))*runif(20,2,5)
 bet=rbind(bet1,bet2)
 pr=c(1,1)*0.5
-sigs=c(1,1)####need to loop through 0.5, 1, 2
+sigs=c(1,1)
 tmp_list = simu_data_sparse(n=n,bet=bet,pr=pr,sigma=sigs)
 nit=1
 nc=2

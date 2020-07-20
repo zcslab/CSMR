@@ -9,14 +9,13 @@ A tremendous amount of applications deal with relating a response variable to a 
 ## Installation
 
 ```
-#install CSMR
 install.packages("devtools")
 devtools::install_github("zcslab/CSMR")
 ```
 
 ## Usage
 ```
-result=CSMR(x,y,nit,nc,max_iter)
+result=CSMR(x,ync,max_iter)
 ```
 
 ## Arguments

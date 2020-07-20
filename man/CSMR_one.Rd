@@ -4,14 +4,12 @@
 \alias{CSMR_one}
 \title{Perform the CSMR algorithm one times.}
 \usage{
-CSMR_one(x, y, nit = 1, nc, max_iter)
+CSMR_one(x, y, nc, max_iter)
 }
 \arguments{
 \item{x}{The matrix}
 
 \item{y}{The external supervised variable.}
-
-\item{nit}{xxx?}
 
 \item{nc}{The component number in the mixture model.}
 

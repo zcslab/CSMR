@@ -4,14 +4,12 @@
 \alias{CSMR}
 \title{The main function of the CSMR algorithm.}
 \usage{
-CSMR(x, y, nit, nc, max_iter)
+CSMR(x, y, nc, max_iter)
 }
 \arguments{
 \item{x}{The matrix}
 
 \item{y}{The external supervised variable.}
-
-\item{nit}{xxx?}
 
 \item{nc}{The component number in the mixture model.}
 

@@ -45,11 +45,10 @@ Rec_Lm<-function(XX,yy){
 #'
 #' @param x The matrix
 #' @param y The external supervised variable.
-#' @param nit xxx?
 #' @param nc The component number in the mixture model.
 #' @param max_iter The maximum iteration number.
 #' @return A list object consist of coefficient, clustering membership, data x, external variable y, predicted y based on regression model.
-CSMR_one<-function(x,y,nit=1,nc,max_iter){
+CSMR_one<-function(x,y,nc,max_iter){
   data=data.frame((x),y)
   mycall = match.call();
   nx=ncol(data)-1; nobs = nrow(data)            # number of observations
@@ -106,16 +105,15 @@ CSMR_one<-function(x,y,nit=1,nc,max_iter){
 #'
 #' @param x The matrix
 #' @param y The external supervised variable.
-#' @param nit xxx?
 #' @param nc The component number in the mixture model.
 #' @param max_iter The maximum iteration number.
 #' @return A list object consist of coefficient, clustering membership, data x, external variable y, predicted y based on regression model.
-CSMR<-function(x,y,nit,nc,max_iter){
-  rrr = CSMR_one(x,y,nit,nc,max_iter); #print(rrr$coffs)
+CSMR<-function(x,y,nc,max_iter){
+  rrr = CSMR_one(x,y,nc,max_iter); #print(rrr$coffs)
   x1=x
   while(length(which(rowSums(abs(rrr$coffs))==0))>0){
     x1=x1[,which(rowSums(abs(rrr$coffs))>0),drop=FALSE]
-    rrr = CSMR_one(x1,y,nit,nc,max_iter); #print(rrr$coffs)
+    rrr = CSMR_one(x1,y,nc,max_iter); #print(rrr$coffs)
   }
   coffs_final = matrix(0,nrow=ncol(x),ncol=nc)
   rownames(coffs_final)=colnames(x)
@@ -180,37 +178,7 @@ blockMap <- function(rrr){
 
 }
 
-#' The simulation function for validating CSMR algorithm.
-#'
-#' @param n Objective number.
-#' @param bet Coefficient matrix.
-#' @param pr Probability for the objective mixtured in all samples.
-#' @param sigma The noise level.
-#' @return A list object consist of simulated data with ground truth.
-simu_data_sparse<-function(n,bet, pr, sigma ){
-  nc=length(pr)
-  x=t(replicate(ncol(bet)-1,rnorm(n,0,1)))
-  rownames(x)=paste("Gene",1:(ncol(bet)-1),sep="")
-  colnames(x)=paste("Sample",1:n,sep="")
-  u=runif(n,0,1);
-  clusters=rep(0,n)
-  y=rep(0,n)
-  pr_tmp=c(0,cumsum(pr))
-  for(j in 1:nc){
-    ee=rnorm(n,0,sigma[j])
-    yy=bet[j,]%*%rbind(1,x)+ee
-    y=y+(u<=pr_tmp[j+1] & u>pr_tmp[j])*yy
-    clusters=clusters+(u<=pr_tmp[j+1] & u>pr_tmp[j])*j
-  }
-  x=t(x)
-  names(y)=paste("S",1:n,sep="")
-  sss=order(clusters)
-  x=x[sss,]
-  y=y[sss]
-  clusters=clusters[sss]
-  tmp_list=list(x=x,y=y,clusters=clusters);names(tmp_list)=c("x","y","clusters")
-  return(tmp_list)
-}
+
 
 #-------------------CSMR example----------------
 
@@ -222,9 +190,10 @@ simu_data_sparse<-function(n,bet, pr, sigma ){
 # pr=c(1,1)*0.5
 # sigs=c(1,1)####need to loop through 0.5, 1, 2
 # tmp_list = simu_data_sparse(n=n,bet=bet,pr=pr,sigma=sigs)
-# nit=1
 # nc=2
 # max_iter=50
 # x=tmp_list$x
 # y=tmp_list$y
-# rrr=CSMR(x,y,nit,nc,max_iter)
+# rrr=CSMR(x,ync,max_iter)
+
+# example_data = tmp_list

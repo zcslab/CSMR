@@ -33,7 +33,7 @@ Result list contains five elements: ```coffs``` shows the coefficient matrix in 
 library(CSMR)
 X = example_data$x
 y = example_data$y
-esult=CSMR(X,y,nc=2,max_iter=50)
+result=CSMR(X,y,nc=2,max_iter=50)
 ```
 
 ### Questions & Problems

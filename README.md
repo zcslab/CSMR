@@ -15,7 +15,7 @@ devtools::install_github("zcslab/CSMR")
 
 ## Usage
 ```
-result=CSMR(x,ync,max_iter)
+result=CSMR(x,y,nc,max_iter)
 ```
 
 ## Arguments

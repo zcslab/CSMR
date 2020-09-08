@@ -15,7 +15,7 @@ devtools::install_github("zcslab/CSMR")
 
 ## Usage
 ```
-result=CSMR(x,y,nc,max_iter)
+result = CSMR(x,y,nc,max_iter)
 ```
 
 ## Arguments
@@ -33,7 +33,7 @@ Result list contains five elements: ```coffs``` shows the coefficient matrix in 
 library(CSMR)
 X = example_data$x
 y = example_data$y
-result=CSMR(X,y,nc=2,max_iter=50)
+result = CSMR(X,y,nc=2,max_iter=50)
 ```
 
 ### Questions & Problems

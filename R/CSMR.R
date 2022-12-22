@@ -54,7 +54,8 @@ CSMR_one<-function(x,y,nc,max_iter){
   nx=ncol(data)-1; nobs = nrow(data)            # number of observations
   flag=0; ccc=0
   x_small=x
-  f_small = nobs/(nc) - 3
+  #f_small = nobs/(nc) - 3
+  f_small = min(nobs/(nc) - 3, 40) # restrict the number of variable for robustness and stability of the algo.
   if(f_small < nx){
     sel_IND = order(abs(cor(x,y)),decreasing=TRUE)[1:f_small]
     x_small=x[,sel_IND]
